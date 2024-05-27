@@ -12,6 +12,7 @@ function App() {
       <SearchBar />
       <RecipeList />
 
+
     </div>
   );
 }
