@@ -1,0 +1,14 @@
+.recipe-list-container {
+    padding: 20px;
+    background-image: url('https://img.redro.pl/tapety/wzor-fast-food-tekstura-tapety-wypelnienia-tlo-strony-internetowej-700-108812001.jpg'); /* Zamień na ścieżkę do swojego obrazu */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .recipe-item {
+    padding: 16px;
+    background-color: rgba(239, 4, 4, 0.8); 
+    border-radius: 8px;
+  }
+  
