@@ -1,18 +1,18 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Header from './Header';
+import SearchBar from './SearchBar';
+import RecipesList from './RecipeList';
 import './App.css';
-import Header from "./Header.js";
-import SearchBar from "./SearchBar.js"; 
-import RecipeList from './RecipeList.js';
-import './Header.css';
 
 function App() {
+  const [recipes, setRecipes] = useState([]);
+  console.log(recipes);
+
   return (
     <div className="App">
       <Header />
-      <SearchBar />
-      <RecipeList />
-
-
+      <SearchBar setRecipes={setRecipes} />
+      <RecipesList recipes={recipes} />
     </div>
   );
 }

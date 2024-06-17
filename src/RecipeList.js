@@ -1,32 +1,38 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import './RecipeList.css';
+import React from 'react';
+import { Grid, Card, CardMedia, CardContent, Typography } from '@mui/material';
+import { styled } from '@mui/system';
 
-const recipes = [
-  // Przykładowe dane przepisów
-  { id: 1, title: 'Przepis 1', description: 'Opis przepisu 1' },
-  { id: 2, title: 'Przepis 2', description: 'Opis przepisu 2' },
-  { id: 3, title: 'Przepis 3', description: 'Opis przepisu 3' },
-  { id: 4, title: 'Przepis 4', description: 'Opis przepisu 4' },
-  // Dodaj więcej przepisów
-];
+const StyledCard = styled(Card)`
+  height: 100%;
+`;
 
-export default function RecipeList() {
+const RecipesList = ({ recipes }) => {
   return (
-    <Box sx={{ flexGrow: 1, padding: 2 }}>
-      <Grid container spacing={2}>
-        {recipes.map((recipe) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={recipe.id}>
-            <Paper sx={{ padding: 2 }}>
-              <Typography variant="h6">{recipe.title}</Typography>
-              <Typography>{recipe.description}</Typography>
-            </Paper>
+    <Grid container rowSpacing={3} columnSpacing={5} padding={{ xs: 0, md: 3, lg: 5 }}>
+      {recipes && recipes.length > 0 ? (
+        recipes.map((recipe) => (
+          <Grid item xs={12} md={6} lg={4} key={recipe.recipe.label}>
+            <StyledCard>
+              <CardMedia sx={{ height: 140 }} image={recipe.recipe.image} title="Przepis" />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {recipe.recipe.label}
+                </Typography>
+                {recipe.recipe.ingredientLines.map((ingredientLine, index) => (
+                  <Typography key={index} gutterBottom variant="body2" component="div">
+                    {ingredientLine}
+                  </Typography>
+                ))}
+              </CardContent>
+            </StyledCard>
           </Grid>
-        ))}
-      </Grid>
-    </Box>
+        ))
+      ) : (
+        <Grid item xs={12}>
+          <Typography variant="body1">Brak wyników wyszukiwania.</Typography>
+        </Grid>
+      )}
+    </Grid>
   );
-}
+};
+export default RecipesList;

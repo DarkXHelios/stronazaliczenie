@@ -1,5 +1,25 @@
 .App {
   text-align: center;
+  background-image: url('https://img.redro.pl/tapety/wzor-fast-food-tekstura-tapety-wypelnienia-tlo-strony-internetowej-700-108812001.jpg'); /* Zamień na ścieżkę do swojego obrazu */
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh; /* Aby tło obejmowało całą wysokość ekranu */
+}
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  padding: 20px;
+  background-image: url('https://www.winiary.pl/sites/default/files/styles/maggi_desktop_image_style/public/winiary_sylwester_1.jpg?h=14d46d77&itok=rG1X4jHe'); /* Ustaw tło tutaj */
+  background-size: cover;
+  background-position: center;
 }
 
 .App-logo {
@@ -13,21 +33,6 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +40,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.App-link {
+  color: #61dafb;
 }

@@ -2,22 +2,31 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 
-export default function SearchBar() {
-  const [searchQuery, setSearchQuery] = useState('');
+const YOUR_APP_ID = '59a9fbf4';
+const YOUR_APP_KEY = 'b467ab21df69d75c889411f601b53034';
 
-  const handleClick = async () => {
-    const appId = 'ec1ae218'; // Zamień na swoje APP_ID
-    const appKey = '2bac3e0970115827729e376eace78a2d'; // Zamień na swoje APP_KEY
-    const response = await fetch(`https://api.edamam.com/api/recipes/v2?q=${searchQuery}&type=public&app_id=${appId}&app_key=${appKey}`);
+const SearchBar = ({ setRecipes }) => {
+  const [query, setQuery] = useState('');
+
+  const fetchRecipes = async () => {
+    const response = await fetch(
+      `https://api.edamam.com/api/recipes/v2?q=${query}&type=public&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}`
+    );
     const data = await response.json();
-    console.log(data);
+    setRecipes(data.hits);
   };
 
-  const handleInputChange = (event) => {
-    setSearchQuery(event.target.value);
+  const handleSearch = () => {
+    fetchRecipes();
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      fetchRecipes();
+    }
   };
 
   return (
@@ -25,33 +34,33 @@ export default function SearchBar() {
       sx={{
         width: 500,
         maxWidth: '100%',
-        margin: '20px auto', 
+        margin: '20px auto', // Opcjonalnie, aby wyrównać na środku
       }}
     >
       <TextField
         fullWidth
         label="Wyszukaj przepisy"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
         id="fullWidth"
-        value={searchQuery}
-        onChange={handleInputChange}
         InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <IconButton onClick={handleClick}>
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton onClick={handleSearch}>
                 <SearchIcon />
               </IconButton>
             </InputAdornment>
           ),
-          sx: {
-            backgroundColor: 'red',
-          },
         }}
+        onKeyPress={handleKeyPress} // Dodaj obsługę naciśnięcia klawisza Enter
         sx={{
           '& .MuiOutlinedInput-root': {
-            backgroundColor: '#f0f0f0', 
+            backgroundColor: '#f0f0f0', // Dodaj kolor tła tutaj
           },
         }}
       />
     </Box>
   );
-}
+};
+
+export default SearchBar;
